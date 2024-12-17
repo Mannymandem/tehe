@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return "An error occurred";
   }
 
-  function renderCryptoButton(buttonEl, symbol, image, network) {
+   function renderCryptoButton(buttonEl, symbol, image, network) {
     buttonEl.innerHTML = ''; 
     buttonEl.style.display = 'inline-flex';
     buttonEl.style.alignItems = 'center';
