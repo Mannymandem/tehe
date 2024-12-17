@@ -160,67 +160,62 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function buildDropdownItems(dropdown, cryptos, onSelect) {
-  const existingItems = dropdown.querySelectorAll('.dropdown-item');
-  existingItems.forEach(i => i.remove());
+    const existingItems = dropdown.querySelectorAll('.dropdown-item');
+    existingItems.forEach(i => i.remove());
 
-  cryptos.forEach(coin => {
-    const itemEl = document.createElement('div');
-    itemEl.classList.add('dropdown-item');
-    itemEl.style.display = 'flex';
-    itemEl.style.alignItems = 'center';
-    itemEl.style.cursor = 'pointer';
-    itemEl.style.padding = '5px';
-    itemEl.style.backgroundColor = '#9002c0'; // Set the background color
-    itemEl.style.borderRadius = '4px'; // Optional rounded corners
-    itemEl.style.color = '#fff'; // Ensure text is visible on dark background
-    itemEl.style.margin = '2px 0'; // Optional spacing between items
+    cryptos.forEach(coin => {
+      const itemEl = document.createElement('div');
+      itemEl.classList.add('dropdown-item');
+      itemEl.style.display = 'flex';
+      itemEl.style.alignItems = 'center';
+      itemEl.style.cursor = 'pointer';
+      itemEl.style.padding = '5px';
 
-    let imgSrc = coin.image && coin.image.trim() !== '' ? coin.image : (coingeckoMap[coin.symbol] || 'https://via.placeholder.com/24');
+      let imgSrc = coin.image && coin.image.trim() !== '' ? coin.image : (coingeckoMap[coin.symbol] || 'https://via.placeholder.com/24');
 
-    const imgEl = document.createElement('img');
-    imgEl.src = imgSrc;
-    imgEl.alt = `${coin.symbol} logo`;
-    imgEl.style.width = '24px';
-    imgEl.style.height = '24px';
-    imgEl.style.marginRight = '8px';
+      const imgEl = document.createElement('img');
+      imgEl.src = imgSrc;
+      imgEl.alt = `${coin.symbol} logo`;
+      imgEl.style.width = '24px';
+      imgEl.style.height = '24px';
+      imgEl.style.marginRight = '8px';
 
-    const infoDiv = document.createElement('div');
-    infoDiv.style.display = 'flex';
-    infoDiv.style.flexDirection = 'column';
+      const infoDiv = document.createElement('div');
+      infoDiv.style.display = 'flex';
+      infoDiv.style.flexDirection = 'column';
 
-    let displayName = coin.symbol;
-    if (coin.name) displayName = coin.symbol + " - " + coin.name;
+      let displayName = coin.symbol;
+      if (coin.name) displayName = coin.symbol + " - " + coin.name;
 
-    const symbolSpan = document.createElement('span');
-    symbolSpan.style.fontWeight = 'bold';
-    symbolSpan.style.fontSize = '14px';
-    symbolSpan.textContent = displayName;
+      const symbolSpan = document.createElement('span');
+      symbolSpan.style.fontWeight = 'bold';
+      symbolSpan.style.fontSize = '14px';
+      symbolSpan.textContent = displayName;
 
-    const netKey = (coin.network || coin.symbol).toUpperCase();
-    const networkDiv = document.createElement('div');
-    networkDiv.style.fontSize = '12px';
-    networkDiv.style.color = '#fff';
-    networkDiv.style.padding = '2px 4px';
-    networkDiv.style.borderRadius = '4px';
-    networkDiv.style.marginTop = '2px';
-    networkDiv.style.display = 'inline-block';
-    networkDiv.style.backgroundColor = networkColors[netKey] || '#444';
-    networkDiv.textContent = coin.network ? coin.network.toUpperCase() : coin.symbol;
+      const netKey = (coin.network || coin.symbol).toUpperCase();
+      const networkDiv = document.createElement('div');
+      networkDiv.style.fontSize = '12px';
+      networkDiv.style.color = '#fff';
+      networkDiv.style.padding = '2px 4px';
+      networkDiv.style.borderRadius = '4px';
+      networkDiv.style.marginTop = '2px';
+      networkDiv.style.display = 'inline-block';
+      networkDiv.style.backgroundColor = networkColors[netKey] || '#444';
+      networkDiv.textContent = coin.network ? coin.network.toUpperCase() : coin.symbol;
 
-    infoDiv.appendChild(symbolSpan);
-    infoDiv.appendChild(networkDiv);
+      infoDiv.appendChild(symbolSpan);
+      infoDiv.appendChild(networkDiv);
 
-    itemEl.appendChild(imgEl);
-    itemEl.appendChild(infoDiv);
+      itemEl.appendChild(imgEl);
+      itemEl.appendChild(infoDiv);
 
-    itemEl.addEventListener('click', () => {
-      onSelect(coin);
-      dropdown.style.display = 'none';
+      itemEl.addEventListener('click', () => {
+        onSelect(coin);
+        dropdown.style.display = 'none';
+      });
+      dropdown.appendChild(itemEl);
     });
-    dropdown.appendChild(itemEl);
-  });
-}
-
+  }
 
   function updateUIAfterDirectionChange() {
     if (direction === "crypto_to_xmr") {
